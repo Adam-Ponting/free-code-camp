@@ -5,7 +5,11 @@
     <router-link :to="{ name: 'tribute' }" class="nav__link"
       >Tribute</router-link
     >&nbsp;|&nbsp;
-    <router-link :to="{ name: 'form' }" class="nav__link">Form</router-link>
+    <router-link :to="{ name: 'form' }" class="nav__link">Form</router-link
+    >&nbsp;|&nbsp;
+    <router-link :to="{ name: 'product-landing' }" class="nav__link"
+      >Product Landing</router-link
+    >
   </nav>
 </template>
 
