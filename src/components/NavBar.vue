@@ -28,13 +28,18 @@ export default {}
 }
 .nav__link {
   font-weight: bold;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
   color: black;
   &:hover {
     text-decoration: underline;
   }
   &.router-link-exact-active {
     color: green;
+  }
+}
+@media screen and (min-width: 800px) {
+  .nav__link {
+    padding: 1rem;
   }
 }
 </style>
