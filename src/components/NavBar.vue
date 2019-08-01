@@ -29,10 +29,12 @@ export default {}
 .nav__link {
   font-weight: bold;
   padding: 1rem;
-  color: #2c3e50;
-
+  color: black;
+  &:hover {
+    text-decoration: underline;
+  }
   &.router-link-exact-active {
-    color: #42b983;
+    color: green;
   }
 }
 </style>
