@@ -7,7 +7,6 @@
 <script>
 import TributePage from '@/components/tribute/TributePage.vue'
 export default {
-  name: 'tribute',
   components: {
     TributePage
   }

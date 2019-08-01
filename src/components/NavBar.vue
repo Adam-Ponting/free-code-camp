@@ -5,7 +5,7 @@
     <router-link :to="{ name: 'tribute' }" class="nav__link"
       >Tribute</router-link
     >&nbsp;|&nbsp;
-    <router-link :to="{ name: 'copy' }" class="nav__link">Copy</router-link>
+    <router-link :to="{ name: 'form' }" class="nav__link">Form</router-link>
   </nav>
 </template>
 
@@ -23,11 +23,7 @@ export default {}
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(white, 0.2);
-
-  &:hover {
-    background: rgba(white, 0.9);
-  }
+  background: white;
 }
 .nav__link {
   font-weight: bold;
@@ -36,11 +32,6 @@ export default {}
 
   &.router-link-exact-active {
     color: #42b983;
-  }
-}
-@media screen and (max-width: 800px) {
-  .nav {
-    background: white;
   }
 }
 </style>
