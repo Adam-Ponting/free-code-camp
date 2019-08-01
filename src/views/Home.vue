@@ -1,17 +1,21 @@
 <template>
   <section class="home">
     <project-header />
-    <project-article />
+    <article-tribute />
+    <article-form />
   </section>
 </template>
 
 <script>
 import ProjectHeader from '@/components/home/ProjectHeader.vue'
-import ProjectArticle from '@/components/home/ProjectArticle.vue'
+import ArticleTribute from '@/components/home/ArticleTribute.vue'
+import ArticleForm from '@/components/home/ArticleForm.vue'
+
 export default {
   components: {
-    ProjectArticle,
-    ProjectHeader
+    ArticleTribute,
+    ProjectHeader,
+    ArticleForm
   }
 }
 </script>
@@ -64,7 +68,7 @@ https://bambielli.com/til/2018-08-19-how-to-target-child-components-with-scoped-
     font-size: 2.2rem;
   }
   /deep/ .header--small {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
   }
   /deep/ .p-text {
     font-size: 1.3rem;
