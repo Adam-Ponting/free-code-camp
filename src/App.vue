@@ -19,5 +19,6 @@ export default {
 <style lang="scss">
 .router-view {
   margin-top: 58px;
+  background: #eee;
 }
 </style>
