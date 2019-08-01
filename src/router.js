@@ -24,15 +24,17 @@ export default new Router({
       path: '/form',
       name: 'form',
       component: Form
-    },
-    {
-      path: '/copy',
-      name: 'copy',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './components/tribute/Copy.vue')
     }
-  ]
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    /* 
+    https://router.vuejs.org/guide/advanced/scroll-behavior.html#async-scrolling
+    // scroll to top on clicking link, if use forward or backwards go to saved position!
+     */
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

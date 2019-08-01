@@ -1,6 +1,6 @@
 <template>
   <nav class="nav">
-    <router-link :to="{ name: 'home' }" class="nav__link">Home</router-link
+    <router-link :to="{ name: 'home' }" class="nav__link">About</router-link
     >&nbsp;|&nbsp;
     <router-link :to="{ name: 'tribute' }" class="nav__link"
       >Tribute</router-link

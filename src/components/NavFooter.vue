@@ -3,17 +3,35 @@
     <p class="footer__details">
       <strong>ADP-FCC</strong>
       by
-      <a :href="this.$options.adp" class="footer-anchor">Adam Ponting.</a> View
-      my
-      <a :href="this.$options.gitHub" target="_blank" class="footer-anchor"
+      <a
+        href="https://adp-cv.web.app/"
+        target="_blank"
+        title="Open https://adp-cv.web.app/"
+        class="footer-anchor"
+        >Adam Ponting.</a
+      >
+      View my
+      <a
+        href="https://github.com/Mada75"
+        target="_blank"
+        title="Open https://github.com/Mada75"
+        class="footer-anchor"
         >GitHub.</a
       >
       The source code is licensed
-      <a :href="this.$options.MIT" target="_blank" class="footer-anchor"
+      <a
+        href="http://opensource.org/licenses/mit-license.php"
+        title="Open http://opensource.org/licenses/mit-license.php"
+        target="_blank"
+        class="footer-anchor"
         >MIT.</a
       >
       The website content is licensed
-      <a :href="this.$options.licence" target="_blank" class="footer-anchor"
+      <a
+        href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        title="Open http://creativecommons.org/licenses/by-nc-sa/4.0/"
+        target="_blank"
+        class="footer-anchor"
         >CC BY NC SA 4.0.</a
       >
       <br />
@@ -23,12 +41,7 @@
 </template>
 
 <script>
-export default {
-  adp: 'mailto:adamponting@outlook.com',
-  MIT: 'http://opensource.org/licenses/mit-license.php',
-  gitHub: 'https://github.com/Mada75',
-  licence: 'http://creativecommons.org/licenses/by-nc-sa/4.0/'
-}
+export default {}
 </script>
 
 <style lang="scss" scoped>

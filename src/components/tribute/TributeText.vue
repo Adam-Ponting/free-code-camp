@@ -22,7 +22,7 @@ https://medium.com/@brockreece/scoped-styles-with-v-html-c0f6d2dc5d8e
   max-width: 1200px;
   margin: 0 auto;
   padding: 1rem;
-  color: lighten($color: pink, $amount: 8%);
+  color: lighten($color: pink, $amount: 11%);
   text-indent: 2rem;
   font-size: 1rem;
   line-height: 1.5rem;
