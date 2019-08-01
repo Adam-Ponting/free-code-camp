@@ -24,6 +24,7 @@ export default {}
   justify-content: center;
   align-items: center;
   background: white;
+  border-bottom: 1px solid black;
 }
 .nav__link {
   font-weight: bold;
