@@ -17,13 +17,7 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-}
 .router-view {
   margin-top: 58px;
-}
-p {
-  margin: 2rem;
 }
 </style>

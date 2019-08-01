@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Tribute from './views/Tribute.vue'
+import Tribute from '@/views/Tribute.vue'
+import Form from '@/views/Form.vue'
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path: '/tribute',
       name: 'tribute',
       component: Tribute
+    },
+    {
+      path: '/form',
+      name: 'form',
+      component: Form
     },
     {
       path: '/copy',
