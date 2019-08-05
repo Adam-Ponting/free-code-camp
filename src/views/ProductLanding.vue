@@ -1,21 +1,23 @@
 <template>
   <div class="product-landing">
     <nav-bar />
+    <welcome-apple />
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/product-landing/NavBar.vue'
+import WelcomeApple from '@/components/product-landing/WelcomeApple.vue'
 export default {
   components: {
-    NavBar
+    NavBar,
+    WelcomeApple
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .product-landing {
-  background: #212529;
   color: white;
 }
 </style>
