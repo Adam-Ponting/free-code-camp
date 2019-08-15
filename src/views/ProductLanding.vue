@@ -1,17 +1,18 @@
 <template>
   <div class="product-landing">
-    <nav-bar />
-    <welcome-apple />
+    <!--     <nav-bar />
+    -->
+    <product-page />
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/product-landing/NavBar.vue'
-import WelcomeApple from '@/components/product-landing/WelcomeApple.vue'
+/* import NavBar from '@/components/product-landing/NavBar.vue'
+ */ import ProductPage from '@/components/product-landing/ProductPage.vue'
 export default {
   components: {
-    NavBar,
-    WelcomeApple
+    /*     NavBar,
+     */ ProductPage
   }
 }
 </script>
