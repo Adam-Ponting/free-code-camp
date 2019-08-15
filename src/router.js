@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Tribute from '@/views/Tribute.vue'
 import Form from '@/views/Form.vue'
+import ProductLanding from '@/views/ProductLanding.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/form',
       name: 'form',
       component: Form
+    },
+    {
+      path: '/product-landing',
+      name: 'product-landing',
+      component: ProductLanding
     }
   ],
   scrollBehavior(to, from, savedPosition) {
