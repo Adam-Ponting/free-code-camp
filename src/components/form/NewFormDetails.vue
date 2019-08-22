@@ -27,6 +27,7 @@
         <legend class="legend">Personal Information</legend>
         <div class="formQandA">
           <label for="firstName" class="form__label">First name</label>
+
           <input
             type="text"
             name="firstName"
@@ -160,8 +161,13 @@
           <label
             for="serviceLevel"
             class="form__label form__label--service-header"
-            >Select a service level</label
-          >
+            >Select a service level
+          </label>
+          <i
+            class="fa fa-question-circle icon"
+            title="Choose a level of service required"
+          ></i>
+
           <br />
           <select
             name="serviceLevel"
@@ -170,7 +176,7 @@
             required
             class="form__input form__input--select"
           >
-            <option value="" disabled selected hidden
+            <option value="" disabled selected hidden class="disabled-option"
               >Open to select a Service</option
             >
             <option value="bronze">Bronze</option>
@@ -445,6 +451,27 @@
         Submit
       </button>
     </form>
+    <article class="service-options">
+      <h2>Service Options</h2>
+      <h3>bronze service</h3>
+      <p>
+        Full safety check, frame and forks wiped down and checked for alignment,
+        gears and brakes adjusted, chain checked and lubricated, wheels and
+        tyres inspected for wear.
+      </p>
+      <h3>silver service</h3>
+      <p>
+        All of the above plus: Drivetrain(chain, cassette and chainset) removed,
+        cleaned and refitted, bottom bracket checked, headset checked and
+        adjusted, wheels trued and hub bearings adjusted(if necessary).
+      </p>
+      <h3>gold service</h3>
+      <p>
+        All of the above plus: Full strip down to the frame and forks, frame and
+        disc mounts faced(if applicable,) headset and bottom bracket removed and
+        serviced(if applicable), wheel hubs disassembled and serviced.
+      </p>
+    </article>
   </main>
 </template>
 
@@ -525,6 +552,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.service-options {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #413c3c;
+}
+.icon {
+  color: blue;
+  margin-left: 0.25rem;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: all 1s;
@@ -615,6 +652,9 @@ export default {
     cursor: pointer;
   }
 }
+.form__label--service-header {
+  margin-top: 1rem;
+}
 .form__label--bike-history,
 .form__label--service-header {
   &:hover {
@@ -641,7 +681,18 @@ export default {
 .checkbox {
   margin-top: 0.25rem;
 }
+.textarea {
+  margin: 1rem 0;
+}
+textarea {
+  resize: none;
+}
+
 .form__label--textarea {
+  &:hover {
+    cursor: pointer;
+  }
+
   &::after {
     content: none;
   }
@@ -666,6 +717,11 @@ export default {
 .form__input--text {
   font-size: 0.9rem;
   line-height: 2rem;
+  color: black;
+}
+::placeholder,
+.disabled-option {
+  color: #919ca0;
 }
 .form__input--radio {
   font-size: 2.9rem;
@@ -679,6 +735,9 @@ export default {
 .form__input--select {
   min-width: 50%;
   max-width: 500px;
+  margin-bottom: 1rem;
+  height: 2.5rem;
+
   &:hover {
     cursor: pointer;
   }
@@ -691,17 +750,21 @@ export default {
 }
 .form__input--textarea {
   display: block;
-  margin-left: 0.5rem;
-  width: 100%;
+  width: 98%;
+  margin: 0 auto;
 }
 .form__input:optional {
   border-left-color: #999;
 }
 .form__input:required {
   border-left-color: lightgreen;
+  font-size: 0.9rem;
+  line-height: 2rem;
+  color: black;
 }
 .form__input:invalid {
   border-left-color: #413c3c;
+  color: #919ca0;
 }
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
