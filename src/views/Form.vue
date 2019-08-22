@@ -1,26 +1,21 @@
 <template>
-  <div class="form">
-    <form-nav-bar />
-    <form-description />
-    <form-details />
+  <div class="form-component">
+    <new-form-details />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import FormNavBar from '@/components/form/FormNavBar.vue'
-import FormDescription from '@/components/form/FormDescription.vue'
-import FormDetails from '@/components/form/FormDetails.vue'
+import NewFormDetails from '@/components/form/NewFormDetails.vue'
 export default {
   components: {
-    FormDetails,
-    FormNavBar,
-    FormDescription
+    NewFormDetails
   }
 }
 </script>
 <style lang="scss" scoped>
-.form {
-  background: lightsteelblue;
+.form-component {
+  background: #faf6f6;
+  padding-bottom: 1px;
 }
 </style>

@@ -1,0 +1,673 @@
+<template>
+  <main>
+    <h1 class="form-header">Book a bike service</h1>
+    <div v-show="!submitSuccessful" class="booking-thanks">
+      <h2 class="thanks__header">Thanks for your booking!</h2>
+      <p>
+        You can return
+        <router-link :to="{ name: 'home' }" class="link">home</router-link>
+        or <a class="link" @click="bookAnother">book</a>
+        another bike in.
+      </p>
+    </div>
+
+    <form
+      action
+      name="serviceForm"
+      class="form"
+      @submit.prevent="submitServiceBooking"
+    >
+      <!-- START personal info -->
+      <fieldset class="field" v-show="!submitSuccessful">
+        <legend class="legend">Personal Information</legend>
+        <div class="formQandA">
+          <label for="firstName" class="form__label">First name</label>
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            placeholder="Enter first name"
+            class="form__input form__input--text"
+            required
+            v-model="userFirstName"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="lastName" class="form__label">Last name</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Enter last name"
+            class="form__input form__input--text"
+            v-model="userLastName"
+            required
+          />
+        </div>
+        <div class="formQandA">
+          <label for="userPhone" class="form__label">Phone number</label>
+          <input
+            type="tel"
+            name="userPhone"
+            id="userPhone"
+            placeholder="Enter phone number"
+            class="form__input form__input--text"
+            required
+            v-model.number="userPhone"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="userEmail" class="form__label">Email</label>
+          <input
+            type="email"
+            name="userEmail"
+            id="userEmail"
+            placeholder="Enter email"
+            class="form__input form__input--text"
+            required
+            v-model="userEmail"
+          />
+        </div>
+      </fieldset>
+      <!-- END personal info -->
+      <!-- START bike details -->
+
+      <fieldset class="field" v-show="!submitSuccessful">
+        <legend class="legend">Bike Details</legend>
+        <div class="formQandA">
+          <label for="bikeModel" class="form__label"
+            >Bike Make &amp; model</label
+          >
+          <input
+            type="text"
+            name="bikeModel"
+            id="bikeModel"
+            placeholder="Enter bike make and model"
+            class="form__input form__input--text"
+            required
+            v-model="bikeModel"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="bikeManufactured" class="form__label"
+            >Approximate year of manufacture</label
+          >
+          <input
+            type="number"
+            name="bikeManufactured"
+            id="bikeManufactured"
+            placeholder="Enter manufacture year"
+            class="form__input form__input--text"
+            min="1900"
+            max="2020"
+            required
+            v-model.number="bikeManufactured"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="bikeHistory" class="form__label form__label--bike-history"
+            >Bike history</label
+          >
+          <br />
+          <input
+            type="radio"
+            name="bikeHistory"
+            value="Original owner"
+            id="historyOrginalOwner"
+            v-model="bikeHistory"
+            class="form__input--radio"
+            required
+          />
+          <label for="historyOrginalOwner" class="form__label--radio"
+            >Owned bike since new</label
+          >
+          <br />
+          <input
+            type="radio"
+            name="bikeHistory"
+            value="Previous owners"
+            id="historyPreviousOwners"
+            v-model="bikeHistory"
+            class="form__input--radio"
+          />
+          <label for="historyPreviousOwners" class="form__label--radio"
+            >This bike has had previous owners</label
+          >
+        </div>
+      </fieldset>
+      <!-- END bike details -->
+      <!-- START service details -->
+
+      <fieldset class="field" v-show="!submitSuccessful">
+        <legend class="legend">Service Details</legend>
+        <div>
+          <label
+            for="serviceLevel"
+            class="form__label form__label--service-header"
+            >Select a service level</label
+          >
+          <br />
+          <select
+            name="serviceLevel"
+            id="serviceLevel"
+            v-model="serviceLevel"
+            required
+            class="form__input form__input--select"
+          >
+            <option value disabled selected hidden
+              >Open to select a Service</option
+            >
+            <option value="bronze">Bronze</option>
+            <option value="silver">Silver</option>
+            <option value="gold">Gold</option>
+          </select>
+        </div>
+
+        <div class="checkbox">
+          <label
+            for="specificAreasToAddress"
+            class="form__label form__label--checkbox-header"
+            >Specific areas to address</label
+          >
+          <!-- START bronze -->
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="frameAlignment"
+              value="frameAlignment"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="frameAlignment" class="form__label--checkbox"
+              >Visual check of frame and forks for wear &amp; checked for
+              alignment
+            </label>
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="gearAdjust"
+              value="gearAdjust"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="gearAdjust" class="form__label--checkbox"
+              >Gears inspected &amp; adjusted</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="brakeAdjust"
+              value="brakeAdjust"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="brakeAdjust" class="form__label--checkbox"
+              >Brakes inspected &amp; adjusted</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="drivetrainInspect"
+              value="drivetrainInspect"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="drivetrainInspect" class="form__label--checkbox"
+              >Drivetrain inspected for wear</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="wheelsTyresInspect"
+              value="wheelsTyresInspect"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="wheelsTyresInspect" class="form__label--checkbox"
+              >Wheels &amp; tyres inspected for wear</label
+            >
+          </div>
+          <!-- END bronze -->
+          <!-- START silver -->
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="drivetrainService"
+              value="drivetrainService"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="drivetrainService" class="form__label--checkbox"
+              >Drivetrain removed, cleaned and worn components replaced</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="bottomBracketCheck"
+              value="bottomBracketCheck"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="bottomBracketCheck" class="form__label--checkbox"
+              >Bottom bracket checked for wear, adjusted as required</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="headsetCheck"
+              value="headsetCheck"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="headsetCheck" class="form__label--checkbox"
+              >Headset checked for wear, adjusted as required</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="wheelTrue"
+              value="wheelTrue"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="wheelTrue" class="form__label--checkbox"
+              >Wheels trued and spokes tensioned as required</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="wheelHubAdjust"
+              value="wheelHubAdjust"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="wheelHubAdjust" class="form__label--checkbox"
+              >Wheels bearings checked, adjusted if necessary</label
+            >
+          </div>
+
+          <!-- END silver -->
+          <!-- START gold -->
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="frameThreadService"
+              value="frameThreadService"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="frameThreadService" class="form__label--checkbox"
+              >Frame threads checked, tapped if necessary</label
+            >
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="headsetService"
+              value="headsetService"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="headsetService" class="form__label--checkbox"
+              >Headset removed, cleaned and refitted, with worn components
+              replaced
+            </label>
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="bottomBracketService"
+              value="bottomBracketService"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="bottomBracketService" class="form__label--checkbox"
+              >Bottom bracket removed, cleaned and refitted, with worn
+              components replaced
+            </label>
+          </div>
+          <div class="checkboxPairs">
+            <input
+              type="checkbox"
+              name="specificAreasToAddress"
+              id="wheelHubService"
+              value="wheelHubService"
+              v-model="serviceAreasToAddress"
+              class="form__input--checkbox"
+            />
+            <label for="wheelHubService" class="form__label--checkbox"
+              >Wheel hubs removed, cleaned and refitted, with worn components
+              replaced
+            </label>
+          </div>
+          <div class="textarea">
+            <label for="notesForMechanic" class="form__label--textarea"
+              >Notes for the mechanic</label
+            >
+            <textarea
+              name="notesForMechanic"
+              id="notesForMechanic"
+              cols="30"
+              rows="5"
+              placeholder="Enter any notes for the mechanic"
+              v-model="notesForMechanic"
+              class="form__input--textarea"
+            ></textarea>
+          </div>
+          <!-- END gold -->
+        </div>
+      </fieldset>
+      <!-- END service details -->
+      <button
+        type="submit"
+        value="Submit"
+        class="form__button--submit"
+        ref="buttonSubmit"
+        :disabled="submitSuccessful"
+        :class="{
+          'button--loading': isLoading,
+          'button--success': submitSuccessful
+        }"
+      >
+        Submit
+      </button>
+    </form>
+  </main>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      userFirstName: '',
+      userLastName: '',
+      userPhone: '',
+      userEmail: '',
+      bikeModel: '',
+      bikeManufactured: '',
+      bikeHistory: '',
+      serviceLevel: '',
+      serviceAreasToAddress: [],
+      notesForMechanic: '',
+      isLoading: false,
+      submitSuccessful: false
+    }
+  },
+  methods: {
+    bookAnother() {
+      this.submitSuccessful = false
+      this.$refs.buttonSubmit.innerHTML = 'Submit'
+    },
+    submitServiceBooking() {
+      this.$refs.buttonSubmit.innerHTML =
+        '<i v-if="isLoading" class="fa fa-spinner fa-spin"></i>'
+      this.isLoading = true
+      let booking = {
+        firstName: this.userFirstName,
+        lastName: this.userLastName,
+        phone: this.userPhone,
+        email: this.userEmail,
+        bike: this.bikeModel,
+        'bike manufactured': this.bikeManufactured,
+        'bike history': this.bikeHistory,
+        service: this.serviceLevel,
+        'areas to address': this.serviceAreasToAddress,
+        notes: this.notesForMechanic
+      }
+      console.log(booking)
+      if (
+        this.userFirstName &&
+        this.userLastName &&
+        this.userPhone &&
+        this.userEmail &&
+        this.bikeModel &&
+        this.bikeManufactured &&
+        this.bikeHistory &&
+        this.serviceLevel
+      ) {
+        console.log('Submitting...')
+        this.userFirstName = ''
+        this.userLastName = ''
+        this.userPhone = ''
+        this.userEmail = ''
+        this.bikeModel = ''
+        this.bikeManufactured = ''
+        this.bikeHistory = ''
+        this.serviceLevel = ''
+        this.serviceAreasToAddress = []
+        this.notesForMechanic = ''
+
+        console.log('Submitted')
+      } else {
+        alert('bad')
+      }
+      setTimeout(() => {
+        this.$refs.buttonSubmit.innerHTML = '&#10004; Success'
+        this.isLoading = false
+        this.submitSuccessful = true
+      }, 3000)
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.link {
+  text-decoration: underline;
+}
+.booking-thanks {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #413c3c;
+}
+.thanks__header {
+  font-size: 2rem;
+  padding: 1rem 1rem 1rem 0rem;
+}
+.form {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  color: #413c3c;
+}
+.form-header {
+  padding: 2rem;
+  font-size: 2.5rem;
+  text-align: center;
+  text-transform: capitalize;
+  background: whitesmoke;
+  color: #413c3c;
+}
+.field {
+  margin: 1rem 0;
+  background-color: whitesmoke;
+}
+.legend {
+  font-size: 1.4rem;
+  text-transform: capitalize;
+  font-variant: small-caps;
+}
+.formQandA {
+  margin: 1rem 0.5rem;
+}
+.asterisk {
+  color: red;
+}
+.checkboxPairs {
+  padding: 0.25rem 0;
+  // border: 2px solid red;
+}
+.form__label {
+  display: inline-block;
+  margin-top: 0.25rem;
+  &::after {
+    content: ' *';
+    color: red;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
+.form__label--radio {
+  display: inline;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  padding-left: 0.25rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.form__label--bike-history,
+.form__label--service-header {
+  &:hover {
+    cursor: default;
+  }
+}
+.form__label--checkbox-header {
+  &:hover {
+    cursor: default;
+  }
+  &::after {
+    content: none;
+  }
+}
+.form__label--checkbox {
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  padding-left: 0.25rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.textarea,
+.checkbox {
+  margin-top: 0.25rem;
+}
+.form__label--textarea {
+  &::after {
+    content: none;
+  }
+}
+
+.form__input {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1rem;
+  color: #6c757d;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-left: 3px solid;
+  border-radius: 0.2rem;
+  transition: border-color 0.2s ease-in-out;
+  margin-left: 0.5rem;
+  &:focus {
+    border: 1px solid lightseagreen;
+    border-left: 3px solid;
+  }
+}
+.form__input--text {
+  font-size: 0.9rem;
+  line-height: 2rem;
+}
+.form__input--radio {
+  font-size: 2.9rem;
+  line-height: 1rem;
+  margin-left: 0.5rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.form__input--select {
+  min-width: 50%;
+  max-width: 500px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.form__input--checkbox {
+  margin-left: 0.5rem;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.form__input--textarea {
+  display: block;
+  margin-left: 0.5rem;
+  width: 100%;
+}
+.form__input:optional {
+  border-left-color: #999;
+}
+.form__input:required {
+  border-left-color: lightgreen;
+}
+.form__input:invalid {
+  border-left-color: #413c3c;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='radio']:checked {
+  color: #3bafda;
+  border-color: #3bafda;
+  background-color: #3bafda;
+}
+input:checked ~ ::before {
+  color: #3bafda;
+  border-color: #3bafda;
+  background-color: #3bafda;
+  border-radius: 50%;
+}
+.form__button--submit {
+  display: block;
+  margin: 1rem auto;
+  width: 8rem;
+  height: 2.5rem;
+  padding: 0.5rem 1rem;
+  background-color: lightseagreen;
+  border-color: lightseagreen;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+.button--loading {
+  background-color: rgb(124, 124, 235);
+  border-color: rgb(124, 124, 235);
+  &:hover {
+    cursor: wait;
+  }
+}
+.button--success {
+  background-color: rgb(39, 241, 66);
+  border-color: rgb(39, 241, 66);
+  &:hover {
+    cursor: default;
+  }
+}
+</style>
