@@ -159,7 +159,7 @@
             required
             class="form__input form__input--select"
           >
-            <option value disabled selected hidden
+            <option value="" disabled selected hidden
               >Open to select a Service</option
             >
             <option value="bronze">Bronze</option>
@@ -168,204 +168,223 @@
           </select>
         </div>
 
-        <div class="checkbox">
+        <div class="checkbox" v-show="serviceLevel">
           <label
             for="specificAreasToAddress"
             class="form__label form__label--checkbox-header"
-            >Specific areas to address</label
+            >Specific areas of <strong>{{ serviceLevel }} </strong>service to
+            address</label
           >
           <!-- START bronze -->
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="frameAlignment"
-              value="frameAlignment"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="frameAlignment" class="form__label--checkbox"
-              >Visual check of frame and forks for wear &amp; checked for
-              alignment
-            </label>
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="gearAdjust"
-              value="gearAdjust"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="gearAdjust" class="form__label--checkbox"
-              >Gears inspected &amp; adjusted</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="brakeAdjust"
-              value="brakeAdjust"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="brakeAdjust" class="form__label--checkbox"
-              >Brakes inspected &amp; adjusted</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="drivetrainInspect"
-              value="drivetrainInspect"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="drivetrainInspect" class="form__label--checkbox"
-              >Drivetrain inspected for wear</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="wheelsTyresInspect"
-              value="wheelsTyresInspect"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="wheelsTyresInspect" class="form__label--checkbox"
-              >Wheels &amp; tyres inspected for wear</label
-            >
+          <div
+            v-show="
+              serviceLevel === 'bronze' ||
+                serviceLevel === 'silver' ||
+                serviceLevel === 'gold'
+            "
+            class="service service__bronze"
+          >
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="frameAlignment"
+                value="frameAlignment"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="frameAlignment" class="form__label--checkbox"
+                >Visual check of frame and forks for wear &amp; checked for
+                alignment
+              </label>
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="gearAdjust"
+                value="gearAdjust"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="gearAdjust" class="form__label--checkbox"
+                >Gears inspected &amp; adjusted</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="brakeAdjust"
+                value="brakeAdjust"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="brakeAdjust" class="form__label--checkbox"
+                >Brakes inspected &amp; adjusted</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="drivetrainInspect"
+                value="drivetrainInspect"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="drivetrainInspect" class="form__label--checkbox"
+                >Drivetrain inspected for wear</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="wheelsTyresInspect"
+                value="wheelsTyresInspect"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="wheelsTyresInspect" class="form__label--checkbox"
+                >Wheels &amp; tyres inspected for wear</label
+              >
+            </div>
           </div>
           <!-- END bronze -->
           <!-- START silver -->
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="drivetrainService"
-              value="drivetrainService"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="drivetrainService" class="form__label--checkbox"
-              >Drivetrain removed, cleaned and worn components replaced</label
-            >
+          <div
+            v-show="serviceLevel === 'silver' || serviceLevel === 'gold'"
+            class="service service__silver"
+          >
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="drivetrainService"
+                value="drivetrainService"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="drivetrainService" class="form__label--checkbox"
+                >Drivetrain removed, cleaned and worn components replaced</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="bottomBracketCheck"
+                value="bottomBracketCheck"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="bottomBracketCheck" class="form__label--checkbox"
+                >Bottom bracket checked for wear, adjusted as required</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="headsetCheck"
+                value="headsetCheck"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="headsetCheck" class="form__label--checkbox"
+                >Headset checked for wear, adjusted as required</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="wheelTrue"
+                value="wheelTrue"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="wheelTrue" class="form__label--checkbox"
+                >Wheels trued and spokes tensioned as required</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="wheelHubAdjust"
+                value="wheelHubAdjust"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="wheelHubAdjust" class="form__label--checkbox"
+                >Wheel bearings checked, adjusted if necessary</label
+              >
+            </div>
           </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="bottomBracketCheck"
-              value="bottomBracketCheck"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="bottomBracketCheck" class="form__label--checkbox"
-              >Bottom bracket checked for wear, adjusted as required</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="headsetCheck"
-              value="headsetCheck"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="headsetCheck" class="form__label--checkbox"
-              >Headset checked for wear, adjusted as required</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="wheelTrue"
-              value="wheelTrue"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="wheelTrue" class="form__label--checkbox"
-              >Wheels trued and spokes tensioned as required</label
-            >
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="wheelHubAdjust"
-              value="wheelHubAdjust"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="wheelHubAdjust" class="form__label--checkbox"
-              >Wheels bearings checked, adjusted if necessary</label
-            >
-          </div>
-
           <!-- END silver -->
           <!-- START gold -->
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="frameThreadService"
-              value="frameThreadService"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="frameThreadService" class="form__label--checkbox"
-              >Frame threads checked, tapped if necessary</label
-            >
+          <div v-show="serviceLevel === 'gold'" class="service service__gold">
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="frameThreadService"
+                value="frameThreadService"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="frameThreadService" class="form__label--checkbox"
+                >Frame threads checked, tapped if necessary</label
+              >
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="headsetService"
+                value="headsetService"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="headsetService" class="form__label--checkbox"
+                >Headset removed, cleaned and refitted, with worn components
+                replaced
+              </label>
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="bottomBracketService"
+                value="bottomBracketService"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="bottomBracketService" class="form__label--checkbox"
+                >Bottom bracket removed, cleaned and refitted, with worn
+                components replaced
+              </label>
+            </div>
+            <div class="checkboxPairs">
+              <input
+                type="checkbox"
+                name="specificAreasToAddress"
+                id="wheelHubService"
+                value="wheelHubService"
+                v-model="serviceAreasToAddress"
+                class="form__input--checkbox"
+              />
+              <label for="wheelHubService" class="form__label--checkbox"
+                >Wheel hubs removed, cleaned and refitted, with worn components
+                replaced
+              </label>
+            </div>
           </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="headsetService"
-              value="headsetService"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="headsetService" class="form__label--checkbox"
-              >Headset removed, cleaned and refitted, with worn components
-              replaced
-            </label>
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="bottomBracketService"
-              value="bottomBracketService"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="bottomBracketService" class="form__label--checkbox"
-              >Bottom bracket removed, cleaned and refitted, with worn
-              components replaced
-            </label>
-          </div>
-          <div class="checkboxPairs">
-            <input
-              type="checkbox"
-              name="specificAreasToAddress"
-              id="wheelHubService"
-              value="wheelHubService"
-              v-model="serviceAreasToAddress"
-              class="form__input--checkbox"
-            />
-            <label for="wheelHubService" class="form__label--checkbox"
-              >Wheel hubs removed, cleaned and refitted, with worn components
-              replaced
-            </label>
-          </div>
+          <!-- END gold -->
+          <!-- START notes -->
+
           <div class="textarea">
             <label for="notesForMechanic" class="form__label--textarea"
               >Notes for the mechanic</label
@@ -380,7 +399,7 @@
               class="form__input--textarea"
             ></textarea>
           </div>
-          <!-- END gold -->
+          <!-- END notes -->
         </div>
       </fieldset>
       <!-- END service details -->
@@ -478,6 +497,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.service {
+  border-left: 5px solid transparent;
+}
+.service__bronze {
+  border-color: #cd7f32;
+}
+.service__silver {
+  border-color: #c0c0c0;
+}
+.service__gold {
+  border-color: #cfb53b;
+}
 .link {
   text-decoration: underline;
 }
