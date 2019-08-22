@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main id="bookService">
     <h1 class="form-header">Book a bike service</h1>
     <div v-show="submitSuccessful" class="booking-thanks">
       <h2 class="thanks__header">Thank you for the booking!</h2>
@@ -27,6 +27,7 @@
         <legend class="legend">Personal Information</legend>
         <div class="formQandA">
           <label for="firstName" class="form__label">First name</label>
+
           <input
             type="text"
             name="firstName"
@@ -160,8 +161,15 @@
           <label
             for="serviceLevel"
             class="form__label form__label--service-header"
-            >Select a service level</label
-          >
+            >Select a service level
+          </label>
+          <a href="#serviceOptions" v-scroll-to="'#serviceOptions'">
+            <i
+              class="fa fa-question-circle icon"
+              title="View the services available"
+            ></i>
+          </a>
+
           <br />
           <select
             name="serviceLevel"
@@ -170,7 +178,7 @@
             required
             class="form__input form__input--select"
           >
-            <option value="" disabled selected hidden
+            <option value="" disabled selected hidden class="disabled-option"
               >Open to select a Service</option
             >
             <option value="bronze">Bronze</option>
@@ -204,7 +212,7 @@
                   name="specificAreasToAddress"
                   id="frameAlignment"
                   value="frameAlignment"
-                  v-model="serviceAreasToAddress"
+                  v-model="bronzeFocus"
                   class="form__input--checkbox"
                 />
                 <label for="frameAlignment" class="form__label--checkbox"
@@ -218,7 +226,7 @@
                   name="specificAreasToAddress"
                   id="gearAdjust"
                   value="gearAdjust"
-                  v-model="serviceAreasToAddress"
+                  v-model="bronzeFocus"
                   class="form__input--checkbox"
                 />
                 <label for="gearAdjust" class="form__label--checkbox"
@@ -231,7 +239,7 @@
                   name="specificAreasToAddress"
                   id="brakeAdjust"
                   value="brakeAdjust"
-                  v-model="serviceAreasToAddress"
+                  v-model="bronzeFocus"
                   class="form__input--checkbox"
                 />
                 <label for="brakeAdjust" class="form__label--checkbox"
@@ -244,7 +252,7 @@
                   name="specificAreasToAddress"
                   id="drivetrainInspect"
                   value="drivetrainInspect"
-                  v-model="serviceAreasToAddress"
+                  v-model="bronzeFocus"
                   class="form__input--checkbox"
                 />
                 <label for="drivetrainInspect" class="form__label--checkbox"
@@ -257,7 +265,7 @@
                   name="specificAreasToAddress"
                   id="wheelsTyresInspect"
                   value="wheelsTyresInspect"
-                  v-model="serviceAreasToAddress"
+                  v-model="bronzeFocus"
                   class="form__input--checkbox"
                 />
                 <label for="wheelsTyresInspect" class="form__label--checkbox"
@@ -281,7 +289,7 @@
                   name="specificAreasToAddress"
                   id="drivetrainService"
                   value="drivetrainService"
-                  v-model="serviceAreasToAddress"
+                  v-model="silverFocus"
                   class="form__input--checkbox"
                 />
                 <label for="drivetrainService" class="form__label--checkbox"
@@ -295,7 +303,7 @@
                   name="specificAreasToAddress"
                   id="bottomBracketCheck"
                   value="bottomBracketCheck"
-                  v-model="serviceAreasToAddress"
+                  v-model="silverFocus"
                   class="form__input--checkbox"
                 />
                 <label for="bottomBracketCheck" class="form__label--checkbox"
@@ -308,7 +316,7 @@
                   name="specificAreasToAddress"
                   id="headsetCheck"
                   value="headsetCheck"
-                  v-model="serviceAreasToAddress"
+                  v-model="silverFocus"
                   class="form__input--checkbox"
                 />
                 <label for="headsetCheck" class="form__label--checkbox"
@@ -321,7 +329,7 @@
                   name="specificAreasToAddress"
                   id="wheelTrue"
                   value="wheelTrue"
-                  v-model="serviceAreasToAddress"
+                  v-model="silverFocus"
                   class="form__input--checkbox"
                 />
                 <label for="wheelTrue" class="form__label--checkbox"
@@ -334,7 +342,7 @@
                   name="specificAreasToAddress"
                   id="wheelHubAdjust"
                   value="wheelHubAdjust"
-                  v-model="serviceAreasToAddress"
+                  v-model="silverFocus"
                   class="form__input--checkbox"
                 />
                 <label for="wheelHubAdjust" class="form__label--checkbox"
@@ -358,7 +366,7 @@
                   name="specificAreasToAddress"
                   id="frameThreadService"
                   value="frameThreadService"
-                  v-model="serviceAreasToAddress"
+                  v-model="goldFocus"
                   class="form__input--checkbox"
                 />
                 <label for="frameThreadService" class="form__label--checkbox"
@@ -371,7 +379,7 @@
                   name="specificAreasToAddress"
                   id="headsetService"
                   value="headsetService"
-                  v-model="serviceAreasToAddress"
+                  v-model="goldFocus"
                   class="form__input--checkbox"
                 />
                 <label for="headsetService" class="form__label--checkbox"
@@ -385,7 +393,7 @@
                   name="specificAreasToAddress"
                   id="bottomBracketService"
                   value="bottomBracketService"
-                  v-model="serviceAreasToAddress"
+                  v-model="goldFocus"
                   class="form__input--checkbox"
                 />
                 <label for="bottomBracketService" class="form__label--checkbox"
@@ -399,7 +407,7 @@
                   name="specificAreasToAddress"
                   id="wheelHubService"
                   value="wheelHubService"
-                  v-model="serviceAreasToAddress"
+                  v-model="goldFocus"
                   class="form__input--checkbox"
                 />
                 <label for="wheelHubService" class="form__label--checkbox"
@@ -460,7 +468,9 @@ export default {
       bikeManufactured: '',
       bikeHistory: '',
       serviceLevel: '',
-      serviceAreasToAddress: [],
+      bronzeFocus: [],
+      silverFocus: [],
+      goldFocus: [],
       notesForMechanic: '',
       isLoading: false,
       submitSuccessful: false
@@ -472,16 +482,24 @@ export default {
       this.$refs.buttonSubmit.innerHTML = 'Submit'
     },
     submitServiceBooking() {
+      let focusOn = []
+      if (this.serviceLevel === 'bronze') {
+        focusOn = this.bronzeFocus
+      } else if (this.serviceLevel === 'silver') {
+        focusOn = this.bronzeFocus.concat(this.silverFocus)
+      } else if (this.serviceLevel === 'gold') {
+        focusOn = this.bronzeFocus.concat(this.silverFocus, this.goldFocus)
+      }
       let booking = {
-        firstName: this.userFirstName,
-        lastName: this.userLastName,
+        first_name: this.userFirstName,
+        last_name: this.userLastName,
         phone: this.userPhone,
         email: this.userEmail,
         bike: this.bikeModel,
-        'bike manufactured': this.bikeManufactured,
-        'bike history': this.bikeHistory,
+        bike_manufactured: this.bikeManufactured,
+        bike_history: this.bikeHistory,
         service: this.serviceLevel,
-        'areas to address': this.serviceAreasToAddress,
+        areas_to_address: focusOn,
         notes: this.notesForMechanic
       }
       console.log('Submitting...', booking)
@@ -500,7 +518,9 @@ export default {
         this.bikeManufactured = ''
         this.bikeHistory = ''
         this.serviceLevel = ''
-        this.serviceAreasToAddress = []
+        this.bronzeFocus = []
+        this.silverFocus = []
+        this.goldFocus = []
         this.notesForMechanic = ''
         console.log('Submitted', booking)
       }, 2500)
@@ -513,6 +533,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.icon {
+  color: rgb(124, 124, 235);
+  margin-left: 0.25rem;
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: all 1s;
@@ -526,6 +550,7 @@ export default {
 .service {
   border-left: 5px solid transparent;
   padding-left: 0.25rem;
+  margin: 0.25rem 0;
 }
 .service__bronze {
   border-color: #cd7f32;
@@ -580,7 +605,6 @@ export default {
 }
 .checkboxPairs {
   padding: 0.25rem 0;
-  // border: 2px solid red;
 }
 .form__label {
   display: inline-block;
@@ -601,6 +625,9 @@ export default {
   &:hover {
     cursor: pointer;
   }
+}
+.form__label--service-header {
+  margin-top: 1rem;
 }
 .form__label--bike-history,
 .form__label--service-header {
@@ -628,7 +655,18 @@ export default {
 .checkbox {
   margin-top: 0.25rem;
 }
+.textarea {
+  margin: 1rem 0;
+}
+textarea {
+  resize: none;
+}
+
 .form__label--textarea {
+  &:hover {
+    cursor: pointer;
+  }
+
   &::after {
     content: none;
   }
@@ -653,6 +691,11 @@ export default {
 .form__input--text {
   font-size: 0.9rem;
   line-height: 2rem;
+  color: black;
+}
+::placeholder,
+.disabled-option {
+  color: #919ca0;
 }
 .form__input--radio {
   font-size: 2.9rem;
@@ -666,6 +709,9 @@ export default {
 .form__input--select {
   min-width: 50%;
   max-width: 500px;
+  margin-bottom: 1rem;
+  height: 2.5rem;
+
   &:hover {
     cursor: pointer;
   }
@@ -678,17 +724,21 @@ export default {
 }
 .form__input--textarea {
   display: block;
-  margin-left: 0.5rem;
-  width: 100%;
+  width: 98%;
+  margin: 0 auto;
 }
 .form__input:optional {
   border-left-color: #999;
 }
 .form__input:required {
   border-left-color: lightgreen;
+  font-size: 0.9rem;
+  line-height: 2rem;
+  color: black;
 }
 .form__input:invalid {
   border-left-color: #413c3c;
+  color: #919ca0;
 }
 input[type='number']::-webkit-inner-spin-button,
 input[type='number']::-webkit-outer-spin-button {
@@ -708,7 +758,7 @@ input:checked ~ ::before {
 }
 .form__button--submit {
   display: block;
-  margin: 1rem auto;
+  margin: 4rem auto 4rem auto;
   width: 8rem;
   height: 2.5rem;
   padding: 0.5rem 1rem;
