@@ -1,12 +1,17 @@
 <template>
   <main>
     <h1 class="form-header">Book a bike service</h1>
-    <div v-show="!submitSuccessful" class="booking-thanks">
-      <h2 class="thanks__header">Thanks for your booking!</h2>
+    <div v-show="submitSuccessful" class="booking-thanks">
+      <h2 class="thanks__header">Thank you for the booking!</h2>
       <p>
         You can return
-        <router-link :to="{ name: 'home' }" class="link">home</router-link>
-        or <a class="link" @click="bookAnother">book</a>
+        <router-link :to="{ name: 'home' }" class="link" title="Return home"
+          >home</router-link
+        >
+        or
+        <a class="link" @click="bookAnother" title="Book another service"
+          >book</a
+        >
         another bike in.
       </p>
     </div>
@@ -466,7 +471,7 @@ export default {
         this.$refs.buttonSubmit.innerHTML = '&#10004; Success'
         this.isLoading = false
         this.submitSuccessful = true
-      }, 3000)
+      }, 2500)
     }
   }
 }
@@ -650,7 +655,7 @@ input:checked ~ ::before {
   height: 2.5rem;
   padding: 0.5rem 1rem;
   background-color: lightseagreen;
-  border-color: lightseagreen;
+  border: none;
   color: white;
   &:hover {
     cursor: pointer;
@@ -658,14 +663,12 @@ input:checked ~ ::before {
 }
 .button--loading {
   background-color: rgb(124, 124, 235);
-  border-color: rgb(124, 124, 235);
   &:hover {
     cursor: wait;
   }
 }
 .button--success {
   background-color: rgb(39, 241, 66);
-  border-color: rgb(39, 241, 66);
   &:hover {
     cursor: default;
   }
