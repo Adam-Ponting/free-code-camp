@@ -1,15 +1,18 @@
 <template>
   <div class="form-component">
-    <new-form-details />
+    <form-input />
+    <service-options />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import NewFormDetails from '@/components/form/NewFormDetails.vue'
+import FormInput from '@/components/form/FormInput.vue'
+import ServiceOptions from '@/components/form/ServiceOptions.vue'
 export default {
   components: {
-    NewFormDetails
+    FormInput,
+    ServiceOptions
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main id="bookService">
     <h1 class="form-header">Book a bike service</h1>
     <div v-show="submitSuccessful" class="booking-thanks">
       <h2 class="thanks__header">Thank you for the booking!</h2>
@@ -163,10 +163,12 @@
             class="form__label form__label--service-header"
             >Select a service level
           </label>
-          <i
-            class="fa fa-question-circle icon"
-            title="Choose a level of service required"
-          ></i>
+          <a href="#serviceOptions" v-scroll-to="'#serviceOptions'">
+            <i
+              class="fa fa-question-circle icon"
+              title="View the services available"
+            ></i>
+          </a>
 
           <br />
           <select
@@ -451,27 +453,6 @@
         Submit
       </button>
     </form>
-    <article class="service-options">
-      <h2>Service Options</h2>
-      <h3>bronze service</h3>
-      <p>
-        Full safety check, frame and forks wiped down and checked for alignment,
-        gears and brakes adjusted, chain checked and lubricated, wheels and
-        tyres inspected for wear.
-      </p>
-      <h3>silver service</h3>
-      <p>
-        All of the above plus: Drivetrain(chain, cassette and chainset) removed,
-        cleaned and refitted, bottom bracket checked, headset checked and
-        adjusted, wheels trued and hub bearings adjusted(if necessary).
-      </p>
-      <h3>gold service</h3>
-      <p>
-        All of the above plus: Full strip down to the frame and forks, frame and
-        disc mounts faced(if applicable,) headset and bottom bracket removed and
-        serviced(if applicable), wheel hubs disassembled and serviced.
-      </p>
-    </article>
   </main>
 </template>
 
@@ -552,14 +533,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.service-options {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  color: #413c3c;
-}
 .icon {
-  color: blue;
+  color: rgb(124, 124, 235);
   margin-left: 0.25rem;
 }
 .fade-enter-active,
@@ -630,7 +605,6 @@ export default {
 }
 .checkboxPairs {
   padding: 0.25rem 0;
-  // border: 2px solid red;
 }
 .form__label {
   display: inline-block;
@@ -784,7 +758,7 @@ input:checked ~ ::before {
 }
 .form__button--submit {
   display: block;
-  margin: 1rem auto;
+  margin: 4rem auto 4rem auto;
   width: 8rem;
   height: 2.5rem;
   padding: 0.5rem 1rem;
