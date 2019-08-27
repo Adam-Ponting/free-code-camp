@@ -38,46 +38,42 @@
             v-model.lazy="userFirstName"
           />
         </div>
-        <transition-group name="fade">
-          <div v-show="userFirstName" key="personal">
-            <div class="formQandA">
-              <label for="lastName" class="form__label">Last name</label>
-              <input
-                type="text"
-                name="lastName"
-                id="lastName"
-                placeholder="Enter last name"
-                class="form__input form__input--text"
-                v-model="userLastName"
-                required
-              />
-            </div>
-            <div class="formQandA">
-              <label for="userPhone" class="form__label">Phone number</label>
-              <input
-                type="tel"
-                name="userPhone"
-                id="userPhone"
-                placeholder="Enter phone number"
-                class="form__input form__input--text"
-                required
-                v-model.number="userPhone"
-              />
-            </div>
-            <div class="formQandA">
-              <label for="userEmail" class="form__label">Email</label>
-              <input
-                type="email"
-                name="userEmail"
-                id="userEmail"
-                placeholder="Enter email"
-                class="form__input form__input--text"
-                required
-                v-model="userEmail"
-              />
-            </div>
-          </div>
-        </transition-group>
+        <div class="formQandA">
+          <label for="lastName" class="form__label">Last name</label>
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            placeholder="Enter last name"
+            class="form__input form__input--text"
+            v-model="userLastName"
+            required
+          />
+        </div>
+        <div class="formQandA">
+          <label for="userPhone" class="form__label">Phone number</label>
+          <input
+            type="tel"
+            name="userPhone"
+            id="userPhone"
+            placeholder="Enter phone number"
+            class="form__input form__input--text"
+            required
+            v-model.number="userPhone"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="userEmail" class="form__label">Email</label>
+          <input
+            type="email"
+            name="userEmail"
+            id="userEmail"
+            placeholder="Enter email"
+            class="form__input form__input--text"
+            required
+            v-model="userEmail"
+          />
+        </div>
       </fieldset>
       <!-- END personal info -->
       <!-- START bike details -->
@@ -99,58 +95,52 @@
             v-model.lazy="bikeModel"
           />
         </div>
-        <transition-group name="fade">
-          <div v-show="bikeModel" key="bike">
-            <div class="formQandA">
-              <label for="bikeManufactured" class="form__label"
-                >Approximate year of manufacture</label
-              >
-              <input
-                type="number"
-                name="bikeManufactured"
-                id="bikeManufactured"
-                placeholder="Enter manufacture year"
-                class="form__input form__input--text"
-                min="1900"
-                max="2020"
-                required
-                v-model.number="bikeManufactured"
-              />
-            </div>
-            <div class="formQandA">
-              <label
-                for="bikeHistory"
-                class="form__label form__label--bike-history"
-                >Bike history</label
-              >
-              <br />
-              <input
-                type="radio"
-                name="bikeHistory"
-                value="Original owner"
-                id="historyOrginalOwner"
-                v-model="bikeHistory"
-                class="form__input--radio"
-                required
-              />
-              <label for="historyOrginalOwner" class="form__label--radio"
-                >Owned bike since new</label
-              >
-              <br />
-              <input
-                type="radio"
-                name="bikeHistory"
-                value="Previous owners"
-                id="historyPreviousOwners"
-                v-model="bikeHistory"
-                class="form__input--radio"
-              />
-              <label for="historyPreviousOwners" class="form__label--radio"
-                >This bike has had previous owners</label
-              >
-            </div>
-          </div>
-        </transition-group>
+        <div class="formQandA">
+          <label for="bikeManufactured" class="form__label"
+            >Approximate year of manufacture</label
+          >
+          <input
+            type="number"
+            name="bikeManufactured"
+            id="bikeManufactured"
+            placeholder="Enter manufacture year"
+            class="form__input form__input--text"
+            min="1900"
+            max="2020"
+            required
+            v-model.number="bikeManufactured"
+          />
+        </div>
+        <div class="formQandA">
+          <label for="bikeHistory" class="form__label form__label--bike-history"
+            >Bike history</label
+          >
+          <br />
+          <input
+            type="radio"
+            name="bikeHistory"
+            value="Original owner"
+            id="historyOrginalOwner"
+            v-model="bikeHistory"
+            class="form__input--radio"
+            required
+          />
+          <label for="historyOrginalOwner" class="form__label--radio"
+            >Owned bike since new</label
+          >
+          <br />
+          <input
+            type="radio"
+            name="bikeHistory"
+            value="Previous owners"
+            id="historyPreviousOwners"
+            v-model="bikeHistory"
+            class="form__input--radio"
+          />
+          <label for="historyPreviousOwners" class="form__label--radio"
+            >This bike has had previous owners</label
+          >
+        </div>
       </fieldset>
       <!-- END bike details -->
       <!-- START service details -->
