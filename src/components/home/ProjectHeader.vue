@@ -48,7 +48,7 @@
       <img src="@/assets/home/github-logo.png" alt="GitHub logo" class="logo" />
       My gitHub repository for this page can be viewed
       <a
-        href="https://github.com/Mada75/free-code-camp"
+        href="https://github.com/Adam-Ponting/free-code-camp"
         target="_blank"
         class="anchor anchor--fcc"
         >here</a
