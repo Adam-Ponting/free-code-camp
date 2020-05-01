@@ -12,9 +12,9 @@
       >
       View my
       <a
-        href="https://github.com/Mada75"
+        href="https://github.com/Adam-Ponting"
         target="_blank"
-        title="Open https://github.com/Mada75"
+        title="Open https://github.com/Adam-Ponting"
         class="footer-anchor"
         >GitHub.</a
       >
